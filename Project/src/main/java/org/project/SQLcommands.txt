@@ -1,0 +1,8 @@
+//SQL datatype for our tables
+Doctor:
+id_doctor   fullName            timetable
+integer     string/varchar2     array[array[timestamp]]
+
+Patient:
+id_patient  fullName            preferences                 dateSignUp      checked
+integer     string/varchar2     array[integer/string]       timestamp       boolean(yes/no)
