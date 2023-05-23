@@ -1,8 +1,8 @@
 //SQL datatype for our tables
 Doctor:
 id_doctor   fullName            timetable
-integer     string/varchar2     array[array[timestamp]]
+integer     string/varchar2     array[array[date]]
 
 Patient:
 id_patient  fullName            preferences                 dateSignUp      checked
-integer     string/varchar2     array[integer/string]       timestamp       boolean(yes/no)
+integer     string/varchar2     array[integer/string]       date           boolean(true/false)

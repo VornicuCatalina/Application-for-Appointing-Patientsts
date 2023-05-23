@@ -12,3 +12,8 @@
 4. What we used
    1. Hibernate + JPA
    2. Postgres
+
+# Database
+## project
+# Schema
+## public

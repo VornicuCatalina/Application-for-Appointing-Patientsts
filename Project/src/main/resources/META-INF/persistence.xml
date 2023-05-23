@@ -21,7 +21,7 @@
         <properties>
 
             <!-- JDBC URL Server:Port/DBName -->
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/lab9"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/project"/>
 
             <!-- DB Driver -->
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
