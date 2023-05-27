@@ -1,6 +1,6 @@
 package org.project.repositories;
 
-import org.project.DatabaseUtils;
+import org.project.databases.DatabaseUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 

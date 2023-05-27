@@ -39,4 +39,8 @@ public class Doctor {
     @OneToMany
     @JoinColumn()
     List<Timetable> timetableList = new ArrayList<>();
+
+    public void addTimetableList(Timetable timetable){
+        timetableList.add(timetable);
+    }
 }

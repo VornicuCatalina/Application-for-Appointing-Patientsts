@@ -16,7 +16,7 @@
         <!-- <class>compulsory.entities.Artist</class> -->
         <class>org.project.entities.Doctor</class>
         <class>org.project.entities.Patient</class>
-        <class>org.project.DatabaseUtils</class>
+        <class>org.project.databases.DatabaseUtils</class>
 
         <properties>
 

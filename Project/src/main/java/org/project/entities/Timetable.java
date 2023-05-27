@@ -14,9 +14,6 @@ public class Timetable {
     @Column(name = "id")
     int id;
 
-    @Column(name = "id_doc")
-    int id_doc;
-
     @Column(name = "day")
     int day;
 
@@ -25,8 +22,7 @@ public class Timetable {
 
     public Timetable(){}
 
-    public Timetable(int id_doc,int day , ArrayList<Date> timetable){
-        this.id_doc=id_doc;
+    public Timetable(int day , ArrayList<Date> timetable){
         this.day=day;
         this.timetable=new ArrayList<>();
         for(Date d : timetable){
