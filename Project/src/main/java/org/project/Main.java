@@ -47,7 +47,10 @@ public class Main {
             System.out.println(d.toString());
         }*/
 
-        FunctionsDB functionsDB = new FunctionsDB();
-        functionsDB.showPatient(2);
+        /*FunctionsDB functionsDB = new FunctionsDB();
+        functionsDB.showPatient(1);*/
+
+        Thread listenForInput = new Thread(new ListenForInput());
+        listenForInput.start();
     }
 }
