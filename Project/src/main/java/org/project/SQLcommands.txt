@@ -1,8 +1,16 @@
-//SQL datatype for our tables
-Doctor:
-id_doctor   fullName            timetable
-integer     string/varchar2     array[array[date]]
+CREATE OR REPLACE PROCEDURE showPatient (id_user int , namePatient out varchar ,
+										id_doc out int, nameDoctor out varchar,
+										dateAppointment out date, visited out boolean) 
+language plpgsql
+AS
+$$
+DECLARE
+BEGIN
+	select fullName,checked into namePatient,visited from patients where id_patient = id_user;
+	select id_doctor, fullName , date_assignation into id_doc,nameDoctor,dateAppointment from
+			assignations natural join doctors where id_patient = id_user;
+END;
+$$;
 
-Patient:
-id_patient  fullName            preferences                 dateSignUp      checked
-integer     string/varchar2     array[integer/string]       date           boolean(true/false)
+
+------------------------------------------------------------------------------------------------------

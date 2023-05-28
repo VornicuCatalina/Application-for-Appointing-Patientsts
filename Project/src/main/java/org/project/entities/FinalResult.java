@@ -18,7 +18,7 @@ public class FinalResult {
     @Column(name = "id_patient")
     private int id_patient;
 
-    @Column(name = "date")
+    @Column(name = "date_assignation")
     private Date date;
 
     public FinalResult(){}

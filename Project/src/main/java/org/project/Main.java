@@ -1,10 +1,13 @@
 package org.project;
 
 import org.project.entities.Doctor;
+import org.project.entities.FinalResult;
 import org.project.entities.Patient;
 import org.project.entities.Timetable;
+import org.project.functions.FunctionsDB;
 import org.project.functions.FunctionsDoc;
 import org.project.repositories.DoctorRepository;
+import org.project.repositories.FinalResultRepository;
 import org.project.repositories.PatientRepository;
 import org.project.repositories.TimetableRepository;
 
@@ -17,6 +20,10 @@ public class Main {
         /*DoctorRepository doctorRepository=new DoctorRepository();
         PatientRepository patientRepository=new PatientRepository();
         TimetableRepository timetableRepository= new TimetableRepository();
+        FinalResultRepository finalResultRepository = new FinalResultRepository();
+
+        FinalResult finalResult = new FinalResult(1,2,new Date());
+        finalResultRepository.save(finalResult);
 
         Doctor doctor = new Doctor("George");
         doctorRepository.save(doctor);
@@ -39,5 +46,8 @@ public class Main {
         for(Date d:test){
             System.out.println(d.toString());
         }*/
+
+        FunctionsDB functionsDB = new FunctionsDB();
+        functionsDB.showPatient(2);
     }
 }
