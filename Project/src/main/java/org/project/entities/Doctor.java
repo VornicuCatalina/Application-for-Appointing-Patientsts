@@ -7,7 +7,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "doctors" , schema = "public")
-
+@NamedQueries({
+        @NamedQuery(name = "Doctor.findById" , query = "select e from Doctor e where e.id = ?1")
+}
+)
 public class Doctor {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY , generator = "id")
@@ -42,5 +45,9 @@ public class Doctor {
 
     public void addTimetableList(Timetable timetable){
         timetableList.add(timetable);
+    }
+
+    public List<Timetable> getTimetableList(){
+        return timetableList;
     }
 }

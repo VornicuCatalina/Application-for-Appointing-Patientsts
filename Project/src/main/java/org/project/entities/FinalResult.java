@@ -6,6 +6,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "assignations" , schema = "public")
+@NamedQueries({
+        @NamedQuery(name = "Result.findByIdDoc" , query = "select e from FinalResult e where e.id_doctor = ?1")
+})
 public class FinalResult {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY , generator = "id")

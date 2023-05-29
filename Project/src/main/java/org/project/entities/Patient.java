@@ -7,6 +7,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "patients" , schema = "public")
+@NamedQueries({
+        @NamedQuery(name = "Patient.findById" , query = "select e from Patient e where e.id = ?1")
+}
+)
 public class Patient {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY , generator = "id")
@@ -63,5 +67,9 @@ public class Patient {
 
     public void setPreferences(ArrayList<Integer> preferences) {
         this.preferences = preferences;
+    }
+
+    public ArrayList<Integer> getPreferences() {
+        return preferences;
     }
 }

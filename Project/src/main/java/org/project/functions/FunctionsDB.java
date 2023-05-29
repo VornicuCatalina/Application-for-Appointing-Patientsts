@@ -1,14 +1,17 @@
 package org.project.functions;
 
 import org.project.databases.Database;
+import org.project.repositories.DoctorRepository;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class FunctionsDB {
+    DoctorRepository doctorRepository = new DoctorRepository();
     private void examplePLSQ(){
         try{
             Connection con = Database.getConnection();
@@ -55,4 +58,38 @@ public class FunctionsDB {
             throw new RuntimeException(e);
         }
     }
+
+    public void showDoctor(int id){
+        System.out.println("That is your schedule doctor "+ doctorRepository.findById(id).getName()+" (id: "+id+")");
+        String result;
+        try{
+            Connection con = Database.getConnection();
+            CallableStatement callableStatement = con.prepareCall("CALL showDoctor(?,?)");
+            callableStatement.setInt(1,id);
+            callableStatement.registerOutParameter(2,Types.VARCHAR);
+
+            callableStatement.executeUpdate();
+
+            result = callableStatement.getString(2);
+            String[] eachRow = parseComma(result);
+            for(int i=0;i<eachRow.length;i++){
+                String[] rowItem = eachRow[i].split("_");
+                String[] date = rowItem[2].split(" ");
+                String[] timeDay = date[1].split(":");
+
+                System.out.println("The patient "+rowItem[1]+" (id: "+rowItem[0]+") has its checkup in "+
+                        date[0]+" at hour "+timeDay[0]+":"+timeDay[1]);
+            }
+
+            //parsing stuff
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String[] parseComma(String s){
+        String[] stringArrayList = s.split(",");
+        return stringArrayList;
+    }
+
 }
