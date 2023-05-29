@@ -15,7 +15,7 @@ public class Algorithm {
     Patient patient;
     private int millis = 60000;
     private ArrayList<Date> helperDates;
-    private DoctorRepository doctorRepository= new DoctorRepository();
+    private DoctorRepository doctorRepository = new DoctorRepository();
     private FinalResultRepository finalResultRepository = new FinalResultRepository();
 
     public void setPatient(Patient patient) {
@@ -23,12 +23,12 @@ public class Algorithm {
         helperDates = new ArrayList<>();
     }
 
-    public void addingInTable(){
+    public void addingInTable() {
         Date date = patient.getDateSignUp();
-        long time = date.getTime() + millis*60*24;
+        long time = date.getTime() + millis * 60 * 24;
         Date newDate = new Date(time);
-        System.out.println(date+" "+newDate);
-        int day_patient = (date.getDay()+1)%6;
+        System.out.println(date + " " + newDate);
+        int day_patient = (date.getDay() + 1) % 6;
 
         //getting doctors in order
         /*for(Integer i:patient.getPreferences()){
@@ -36,11 +36,11 @@ public class Algorithm {
         }*/
     }
 
-    public Date returnAcceptedDate(Date date , int dayPatient, int idDoctor){
+    public Date returnAcceptedDate(Date date, int dayPatient, int idDoctor) {
         Doctor doctor = doctorRepository.findById(idDoctor);
         List<Timetable> result = doctor.getTimetableList();
-        int ok=1;
-        int counter=0;
+        int ok = 1;
+        int counter = 0;
         while (true) {
             for (Timetable t : result) {
                 if (t.getDay() == dayPatient) {
@@ -59,23 +59,25 @@ public class Algorithm {
                                 break;
                             }
                         }
+
+
                     }
-                    if (ok == 1 &&counter<3) {
+                    if (ok == 1 && counter < 3) {
                         return date;
-                    }
-                    else if(ok==1){
+                    } else if (ok == 1) {
                         helperDates.add(date);
                         return null;
                     }
                 }
             }
-            dayPatient=(dayPatient+1)%6;
-            long time = date.getTime() + millis*60*24;
+            dayPatient = (dayPatient + 1) % 6;
+            long time = date.getTime() + millis * 60 * 24;
             date = new Date(time);
             counter++;
         }
     }
-    public ArrayList<Date> getHelperDates(){
+
+    public ArrayList<Date> getHelperDates() {
         return helperDates;
     }
 }
