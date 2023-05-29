@@ -41,3 +41,17 @@ BEGIN
 	end if;
 END;
 $$;
+--------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE showDoctor (id_user int,longDescription out VARCHAR)
+language plpgsql
+AS
+$$
+DECLARE
+BEGIN
+select array_to_string(ARRAY(SELECT id_patient||'_'|| fullName ||'_'|| date_assignation
+FROM assignations
+natural join patients
+where id_doctor = id_user ORDER BY date_assignation), ', ') into longDescription;
+END;
+$$;
+------------------------------------------------------------------------------------------------------------
