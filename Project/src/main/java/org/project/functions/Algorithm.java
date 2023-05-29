@@ -59,6 +59,8 @@ public class Algorithm {
                                 break;
                             }
                         }
+
+
                     }
                     if (ok == 1 && counter < 3) {
                         return date;
