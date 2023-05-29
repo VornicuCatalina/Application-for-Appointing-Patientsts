@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class Database {
     private static final String URL = "jdbc:postgresql://localhost:5432/project";
     private static final String USER = "postgres";
-    private static final String PASSWORD = "admin123";
+    private static final String PASSWORD = "parola";
     private static Connection connection = null;
     static HikariDataSource ds;
 
@@ -51,7 +51,7 @@ public class Database {
 
     //for HikariCP
     public static void createHikariCP() {
-        HikariConfig config = new HikariConfig("C:\\Users\\User\\Documents\\Project-Java\\Project\\src\\main\\java\\org\\project\\hikari.properties");
+        HikariConfig config = new HikariConfig("E:\\FACULTATE\\Advanced_Programming_(Java)\\Project-Java\\Project\\src\\main\\java\\org\\project\\hikari.properties");
         ds = new HikariDataSource(config);
     }
 }

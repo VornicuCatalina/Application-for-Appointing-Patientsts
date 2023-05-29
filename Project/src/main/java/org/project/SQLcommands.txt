@@ -14,17 +14,30 @@ $$;
 
 
 ------------------------------------------------------------------------------------------------------
+check if the user exists, then check if it is a patient or a doctor:
+    - if it is a patient, return 0
+    - if it is a doctor, return 1
+    - if it is not a patient or a doctor, return -1
 
-CREATE OR REPLACE PROCEDURE showDoctor (id_user int,longDescription out VARCHAR)
+
+CREATE OR REPLACE PROCEDURE checkExistence (id_user int, person_type out int,
+											existence_patient int, existence_doctor int)
 language plpgsql
 AS
 $$
 DECLARE
 BEGIN
-select array_to_string(ARRAY(SELECT id_patient||'_'|| fullName ||'_'|| date_assignation
-FROM assignations
-natural join patients
-where id_doctor = id_user ORDER BY date_assignation), ', ') into longDescription;
+	select count(*) into existence_patient from patients where id_patient = id_user;
+	select count(*) into existence_doctor from doctors where id_doctor = id_user;
+	if (existence_patient = 0 and existence_doctor = 0) then
+		person_type = -1;
+		return;
+	elsif (existence_patient > 0) then
+		person_type = 0;
+		return;
+	else
+		person_type = 1;
+		return;
+	end if;
 END;
 $$;
-------------------------------------------------------------------------------------------------------------
