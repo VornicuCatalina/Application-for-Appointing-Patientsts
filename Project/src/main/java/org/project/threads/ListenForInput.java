@@ -16,6 +16,11 @@ public class ListenForInput implements Runnable {
     FunctionsPatients functionsPatients = new FunctionsPatients();
     PatientRepository patientRepository = new PatientRepository();
     DoctorRepository doctorRepository = new DoctorRepository();
+    Thread deletingStuff;
+
+    public void setDeletingStuff(Thread t) {
+        deletingStuff = t;
+    }
 
     public void run() {
         boolean ok = true;
@@ -24,6 +29,7 @@ public class ListenForInput implements Runnable {
             String input = scanner.nextLine();
             if (input.equals("exit")) {
                 System.out.println("Exiting...");
+                deletingStuff.interrupt();
                 ok = false;
             } else if (input.equals("help")) {
                 System.out.println("Here are the available commands:" +
