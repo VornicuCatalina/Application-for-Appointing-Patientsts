@@ -11,15 +11,17 @@ import org.project.repositories.DoctorRepository;
 import org.project.repositories.FinalResultRepository;
 import org.project.repositories.PatientRepository;
 import org.project.repositories.TimetableRepository;
+import org.project.threads.DeletingOlderDates;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, InterruptedException {
         /*DoctorRepository doctorRepository = new DoctorRepository();
         PatientRepository patientRepository = new PatientRepository();
         TimetableRepository timetableRepository = new TimetableRepository();
@@ -84,7 +86,14 @@ public class Main {
         Date d=sdf.parse("29/05/2023 09:33");
         System.out.println(d.toString());*/
 
-        FunctionsDB functionsDB = new FunctionsDB();
-        functionsDB.deleteOlderDates();
+        /*FunctionsDB functionsDB = new FunctionsDB();
+        functionsDB.deleteOlderDates();*/
+
+        /*DeletingOlderDates deletingOlderDatesMan = new DeletingOlderDates();
+        Thread deletingOlderDates = new Thread(deletingOlderDatesMan);
+        deletingOlderDates.start();
+        TimeUnit.SECONDS.sleep(5);
+        System.out.println("intru");
+        deletingOlderDates.interrupt();*/
     }
 }
