@@ -31,6 +31,22 @@ public class FunctionsDB {
     }
 
     //PROCEDURES
+    public int checkExistence(int id) {
+        int person_type; // -1 - nonexistent ; 1-doc 0-patient
+        try {
+            Connection con = Database.getConnection();
+            CallableStatement callableStatement = con.prepareCall("CALL checkExistence(?,?)");
+            callableStatement.setInt(1, id);
+            callableStatement.registerOutParameter(2, Types.INTEGER);
+            callableStatement.executeUpdate();
+
+            person_type = callableStatement.getInt(2);
+            return person_type;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void showPatient(int id) {
         String name_doc;
         String name_patient;
@@ -58,7 +74,7 @@ public class FunctionsDB {
             if (visited) {
                 msg = "already had this checkup";
             } else {
-                msg = "will be have it soon";
+                msg = "will have it soon";
             }
             FinalResult finalResult = finalResultRepository.findByIdPatient(id);
             System.out.println("The patient " + name_patient + " (id: " + id +

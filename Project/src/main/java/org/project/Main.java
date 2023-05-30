@@ -24,11 +24,11 @@ public class Main {
         PatientRepository patientRepository = new PatientRepository();
         TimetableRepository timetableRepository = new TimetableRepository();
         FinalResultRepository finalResultRepository = new FinalResultRepository();
-        Patient patient=patientRepository.findById(2);
+        /*Patient patient=patientRepository.findById(2);
         ArrayList<Integer> arrayList = new ArrayList<>();
         arrayList.add(6);
         patient.setPreferences(arrayList);
-        patientRepository.save(patient);
+        patientRepository.save(patient);*/
         //System.out.println(patient.getDateSignUp().getHours());
 
         /*FinalResult finalResult = new FinalResult(1,2,new Date());
@@ -60,16 +60,16 @@ public class Main {
         functionsDB.showDoctor(6);
         functionsDB.showPatient(2);*/
 
-        /*Thread listenForInput = new Thread(new ListenForInput());
-        listenForInput.start();*/
+        Thread listenForInput = new Thread(new ListenForInput());
+        listenForInput.start();
 
         /*FinalResultRepository finalResultRepository = new FinalResultRepository();
         FinalResult finalResult = new FinalResult(6,5, new Date());
         finalResultRepository.save(finalResult);*/
 
-        Algorithm algorithm = new Algorithm();
+        /*Algorithm algorithm = new Algorithm();
         algorithm.setPatient(patient);
-        algorithm.addingInTable();
+        algorithm.addingInTable();*/
         /*Date d = algorithm.returnAcceptedDate(new Date(),6);
         if(d==null){
             System.out.println("NULL");

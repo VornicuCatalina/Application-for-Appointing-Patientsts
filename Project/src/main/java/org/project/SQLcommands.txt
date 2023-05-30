@@ -20,12 +20,13 @@ check if the user exists, then check if it is a patient or a doctor:
     - if it is not a patient or a doctor, return -1
 
 
-CREATE OR REPLACE PROCEDURE checkExistence (id_user int, person_type out int,
-											existence_patient int, existence_doctor int)
+CREATE OR REPLACE PROCEDURE checkExistence (id_user int, person_type out int)
 language plpgsql
 AS
 $$
 DECLARE
+existence_patient integer;
+existence_doctor integer;
 BEGIN
 	select count(*) into existence_patient from patients where id_patient = id_user;
 	select count(*) into existence_doctor from doctors where id_doctor = id_user;
