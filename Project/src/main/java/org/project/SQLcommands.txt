@@ -56,3 +56,39 @@ where id_doctor = id_user ORDER BY date_assignation), ',') into longDescription;
 END;
 $$;
 ------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION DELETEOLDERDATES () RETURNS integer LANGUAGE PLPGSQL AS $$
+DECLARE
+oldDates timestamp := current_timestamp - interval '7 days';
+numberDates integer;
+dates integer[] ='{}';
+idPatients integer[] ='{}';
+aSingleId record;
+counter integer :=0;
+idPatientsCursor CURSOR(p_date timestamp) FOR
+select id_patient,id_doctor from assignations where date_assignation<p_date;
+BEGIN
+	select count(*) into numberDates from assignations where date_assignation<oldDates;
+	if numberDates = 0 then
+		return 0;
+	else
+	open idPatientsCursor(oldDates);
+
+--for cursor, finding ids
+	loop
+	fetch idPatientsCursor into aSingleId;
+	exit when not found;
+	dates[counter] := aSingleId.id_patient;
+	counter:=counter+1;
+	end loop;
+	close idPatientsCursor;
+
+--now deleting the records in both tables
+	delete from assignations where date_assignation<oldDates;
+	for i in 0..counter loop
+	delete from patients where id_patient = dates[i];
+	end loop;
+	return numberDates;
+	end if;
+END;
+$$;
+------------------------------------------------------------------

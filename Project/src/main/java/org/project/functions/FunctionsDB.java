@@ -30,14 +30,15 @@ public class FunctionsDB {
         }
     }
 
-    public void deleteOlderDates(){
+    public void deleteOlderDates() {
         try {
             Connection con = Database.getConnection();
             CallableStatement cstmt = con.prepareCall("{? = CALL deleteOlderDates()}");
             cstmt.registerOutParameter(1, Types.INTEGER);
             cstmt.executeUpdate();
             int result = cstmt.getInt(1);
-            System.out.println(result);
+            System.out.println("There had been deleted " + result + " rows");
+            con.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
