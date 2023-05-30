@@ -32,11 +32,11 @@ BEGIN
 	if (existence_patient = 0 and existence_doctor = 0) then
 		person_type = -1;
 		return;
-	elsif (existence_patient > 0) then
-		person_type = 0;
+	elsif (existence_doctor > 0) then
+		person_type = 1;
 		return;
 	else
-		person_type = 1;
+		person_type = 0;
 		return;
 	end if;
 END;
@@ -51,7 +51,7 @@ BEGIN
 select array_to_string(ARRAY(SELECT id_patient||'_'|| fullName ||'_'|| date_assignation
 FROM assignations
 natural join patients
-where id_doctor = id_user ORDER BY date_assignation), ', ') into longDescription;
+where id_doctor = id_user ORDER BY date_assignation), ',') into longDescription;
 END;
 $$;
 ------------------------------------------------------------------------------------------------------------

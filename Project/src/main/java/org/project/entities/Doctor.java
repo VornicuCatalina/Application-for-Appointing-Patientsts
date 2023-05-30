@@ -6,25 +6,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "doctors" , schema = "public")
+@Table(name = "doctors", schema = "public")
 @NamedQueries({
-        @NamedQuery(name = "Doctor.findById" , query = "select e from Doctor e where e.id = ?1")
+        @NamedQuery(name = "Doctor.findById", query = "select e from Doctor e where e.id = ?1")
 }
 )
 public class Doctor {
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY , generator = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
     @Column(name = "id_doctor")
     private int id;
 
     @Column(name = "fullName")
     String name;
 
-    public Doctor(){
+    public Doctor() {
     }
 
-    public Doctor(String name){
-        this.name=name;
+    public Doctor(String name) {
+        this.name = name;
     }
 
     public void setName(String name) {
@@ -43,11 +43,11 @@ public class Doctor {
     @JoinColumn()
     List<Timetable> timetableList = new ArrayList<>();
 
-    public void addTimetableList(Timetable timetable){
+    public void addTimetableList(Timetable timetable) {
         timetableList.add(timetable);
     }
 
-    public List<Timetable> getTimetableList(){
+    public List<Timetable> getTimetableList() {
         return timetableList;
     }
 }

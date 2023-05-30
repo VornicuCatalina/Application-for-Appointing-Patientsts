@@ -4,14 +4,15 @@ import org.project.entities.Doctor;
 
 import java.util.List;
 
-public class DoctorRepository extends DataRepository<Doctor,Long> {
-    public Class<Doctor> getEntityClass(){
+public class DoctorRepository extends DataRepository<Doctor, Long> {
+    public Class<Doctor> getEntityClass() {
         return Doctor.class;
     }
 
-    public DoctorRepository(){}
+    public DoctorRepository() {
+    }
 
-    public void create(Doctor doctor){
+    public void create(Doctor doctor) {
         save(doctor);
     }
 

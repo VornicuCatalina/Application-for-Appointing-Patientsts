@@ -8,29 +8,30 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "timetable" , schema = "public")
+@Table(name = "timetable", schema = "public")
 @NamedQueries({
-        @NamedQuery(name = "Timetable.findByDay" , query="select e from Timetable e where e.day=?1")
+        @NamedQuery(name = "Timetable.findByDay", query = "select e from Timetable e where e.day=?1")
 })
 public class Timetable {
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY , generator = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
     @Column(name = "id")
     int id;
 
     @Column(name = "day")
     int day;
 
-    @Column(name = "timetable" , columnDefinition = "text[]")
+    @Column(name = "timetable", columnDefinition = "text[]")
     ArrayList<String> timetable;
 
-    public Timetable(){}
+    public Timetable() {
+    }
 
-    public Timetable(int day , ArrayList<Date> timetable){
+    public Timetable(int day, ArrayList<Date> timetable) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-        this.day=day;
-        this.timetable=new ArrayList<>();
-        for(Date d : timetable){
+        this.day = day;
+        this.timetable = new ArrayList<>();
+        for (Date d : timetable) {
             this.timetable.add(formatter.format(d).toString());
         }
     }

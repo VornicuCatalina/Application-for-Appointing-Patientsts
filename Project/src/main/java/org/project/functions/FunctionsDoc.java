@@ -7,38 +7,37 @@ public class FunctionsDoc {
     private int millis = 60000;
     private Date date1proj;
     private Date date2proj;
-    private ArrayList<Date> getTimetable(Date date1, Date date2){
+
+    private ArrayList<Date> getTimetable(Date date1, Date date2) {
         ArrayList<Date> solution = new ArrayList<>();
-        long dateHelper = date1.getTime() + (30*millis);
+        long dateHelper = date1.getTime() + (30 * millis);
         int hours = date2.getHours();
         int mins = date2.getMinutes();
-        boolean ok=false;
+        boolean ok = false;
         solution.add(date1);
-        while(true){
+        while (true) {
             date1 = new Date(dateHelper);
             int s_hour = date1.getHours();
-            if(s_hour<hours){
-                if(ok){
+            if (s_hour < hours) {
+                if (ok) {
                     break;
                 }
                 solution.add(date1);
-                dateHelper = dateHelper + (30*millis);
-            }
-            else if((s_hour == hours) && (date1.getMinutes()<mins)){
+                dateHelper = dateHelper + (30 * millis);
+            } else if ((s_hour == hours) && (date1.getMinutes() < mins)) {
                 solution.add(date1);
-                dateHelper = dateHelper + (30*millis);
-                ok=true;
-            }
-            else{
+                dateHelper = dateHelper + (30 * millis);
+                ok = true;
+            } else {
                 break;
             }
         }
         return solution;
     }
 
-    private void insertDates(String s1, String s2){
-        String[] result_start=s1.split(":");
-        String[] result_finish=s2.split(":");
+    private void insertDates(String s1, String s2) {
+        String[] result_start = s1.split(":");
+        String[] result_finish = s2.split(":");
 
         date1proj = new Date();
         date2proj = new Date();
@@ -56,8 +55,8 @@ public class FunctionsDoc {
 
     }
 
-    public ArrayList<Date> createAll(String s1, String s2){
-        insertDates(s1,s2);
-        return getTimetable(date1proj,date2proj);
+    public ArrayList<Date> createAll(String s1, String s2) {
+        insertDates(s1, s2);
+        return getTimetable(date1proj, date2proj);
     }
 }

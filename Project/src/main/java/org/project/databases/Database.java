@@ -51,7 +51,8 @@ public class Database {
 
     //for HikariCP
     public static void createHikariCP() {
-        HikariConfig config = new HikariConfig("E:\\FACULTATE\\Advanced_Programming_(Java)\\Project-Java\\Project\\src\\main\\java\\org\\project\\hikari.properties");
+        //HikariConfig config = new HikariConfig("E:\\FACULTATE\\Advanced_Programming_(Java)\\Project-Java\\Project\\src\\main\\java\\org\\project\\hikari.properties");
+        HikariConfig config = new HikariConfig("C:\\Users\\User\\Documents\\Project-Java\\Project\\src\\main\\java\\org\\project\\hikari.properties");
         ds = new HikariDataSource(config);
     }
 }

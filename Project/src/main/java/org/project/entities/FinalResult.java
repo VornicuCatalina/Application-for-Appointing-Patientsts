@@ -5,13 +5,14 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "assignations" , schema = "public")
+@Table(name = "assignations", schema = "public")
 @NamedQueries({
-        @NamedQuery(name = "Result.findByIdDoc" , query = "select e from FinalResult e where e.id_doctor = ?1")
+        @NamedQuery(name = "Result.findByIdDoc", query = "select e from FinalResult e where e.id_doctor = ?1"),
+        @NamedQuery(name = "Result.findByIdPatient", query = "select e from FinalResult e where e.id_patient = ?1")
 })
 public class FinalResult {
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY , generator = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
     @Column(name = "id_assignation")
     private int id;
 
@@ -24,9 +25,10 @@ public class FinalResult {
     @Column(name = "date_assignation")
     private Date date;
 
-    public FinalResult(){}
+    public FinalResult() {
+    }
 
-    public FinalResult(int id_doctor , int id_patient, Date date){
+    public FinalResult(int id_doctor, int id_patient, Date date) {
         this.id_doctor = id_doctor;
         this.id_patient = id_patient;
         this.date = date;

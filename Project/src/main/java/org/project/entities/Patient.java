@@ -6,21 +6,21 @@ import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
-@Table(name = "patients" , schema = "public")
+@Table(name = "patients", schema = "public")
 @NamedQueries({
-        @NamedQuery(name = "Patient.findById" , query = "select e from Patient e where e.id = ?1")
+        @NamedQuery(name = "Patient.findById", query = "select e from Patient e where e.id = ?1")
 }
 )
 public class Patient {
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY , generator = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
     @Column(name = "id_patient")
     private int id;
 
     @Column(name = "fullName")
     String name;
 
-    @Column(name = "preferences" , columnDefinition = "int[]")
+    @Column(name = "preferences", columnDefinition = "int[]")
     ArrayList<Integer> preferences;
 
     @Column(name = "dateSignUp")
@@ -29,16 +29,16 @@ public class Patient {
     @Column(name = "checked")
     boolean checked;
 
-    public Patient(){
-        this.checked=false;
+    public Patient() {
+        this.checked = false;
         this.dateSignUp = new Date();
     }
 
-    public Patient(String name, ArrayList<Integer> preferences){
+    public Patient(String name, ArrayList<Integer> preferences) {
         this.name = name;
         this.preferences = preferences;
         this.dateSignUp = new Date();
-        this.checked=false;
+        this.checked = false;
     }
 
     public int getId() {
