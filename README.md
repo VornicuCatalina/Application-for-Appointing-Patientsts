@@ -1,4 +1,4 @@
-# Project-Java
+# Project-Java x Pl/sql
 
 1. DB settings
    1. Patients
