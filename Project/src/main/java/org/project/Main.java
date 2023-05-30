@@ -20,10 +20,10 @@ import java.util.Date;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
-        DoctorRepository doctorRepository = new DoctorRepository();
+        /*DoctorRepository doctorRepository = new DoctorRepository();
         PatientRepository patientRepository = new PatientRepository();
         TimetableRepository timetableRepository = new TimetableRepository();
-        FinalResultRepository finalResultRepository = new FinalResultRepository();
+        FinalResultRepository finalResultRepository = new FinalResultRepository();*/
         /*Patient patient=patientRepository.findById(2);
         ArrayList<Integer> arrayList = new ArrayList<>();
         arrayList.add(6);
@@ -60,8 +60,8 @@ public class Main {
         functionsDB.showDoctor(6);
         functionsDB.showPatient(2);*/
 
-        Thread listenForInput = new Thread(new ListenForInput());
-        listenForInput.start();
+        /*Thread listenForInput = new Thread(new ListenForInput());
+        listenForInput.start();*/
 
         /*FinalResultRepository finalResultRepository = new FinalResultRepository();
         FinalResult finalResult = new FinalResult(6,5, new Date());
@@ -83,5 +83,8 @@ public class Main {
         /*SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy hh:mm");
         Date d=sdf.parse("29/05/2023 09:33");
         System.out.println(d.toString());*/
+
+        FunctionsDB functionsDB = new FunctionsDB();
+        functionsDB.deleteOlderDates();
     }
 }

@@ -30,6 +30,19 @@ public class FunctionsDB {
         }
     }
 
+    public void deleteOlderDates(){
+        try {
+            Connection con = Database.getConnection();
+            CallableStatement cstmt = con.prepareCall("{? = CALL deleteOlderDates()}");
+            cstmt.registerOutParameter(1, Types.INTEGER);
+            cstmt.executeUpdate();
+            int result = cstmt.getInt(1);
+            System.out.println(result);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     //PROCEDURES
     public int checkExistence(int id) {
         int person_type; // -1 - nonexistent ; 1-doc 0-patient
