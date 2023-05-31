@@ -65,6 +65,8 @@ public class ListenForInput implements Runnable {
                 showPatients();
             } else if (input.startsWith("show statistics")) {
                 showStatistics(input);
+            } else if (input.startsWith("show")) {
+                showPerson(input);
             } else if (input.startsWith("register patient")) {
                 registerPatient(input);
             } else if (input.startsWith("register doctor")) {
@@ -129,6 +131,20 @@ public class ListenForInput implements Runnable {
         FunctionsDB functionsDB = new FunctionsDB();
         String result = functionsDB.checkStatistics(id);
         System.out.println(result);
+    }
+
+    private void showPerson(String input) {
+        String[] splitCommand = input.split(" ");
+        int id = Integer.parseInt(splitCommand[1]);
+        if (splitCommand[2].equals("patient")) {
+            FunctionsDB functionsDB = new FunctionsDB();
+            functionsDB.showPatient(id);
+        } else if (splitCommand[2].equals("doctor")) {
+            FunctionsDB functionsDB = new FunctionsDB();
+            functionsDB.showDoctor(id);
+        } else {
+            System.out.println("Invalid command! Type help for the available commands.");
+        }
     }
 
     private void registerPatient(String input) {
