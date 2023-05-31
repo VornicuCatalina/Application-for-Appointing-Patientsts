@@ -91,4 +91,53 @@ BEGIN
 	end if;
 END;
 $$;
-------------------------------------------------------------------
+---------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE percentage(
+    IN assignments_number numeric,
+    IN timetable_number numeric,
+    OUT result numeric
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    result := (assignments_number / timetable_number) * 100;
+END;
+$$;
+---------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE get_doctor_statistics(
+    input_date DATE,
+    doctor_id integer,
+    OUT result numeric
+)
+LANGUAGE plpgsql
+AS
+$$
+DECLARE
+    monday_date DATE;
+    sunday_date DATE;
+    timetable_dates numeric;
+    assignment_dates numeric;
+BEGIN
+    WITH week_boundaries AS (
+        SELECT
+            input_date - (EXTRACT(DOW FROM input_date)::INTEGER) + 1 AS monday,
+            input_date + (7 - EXTRACT(DOW FROM input_date)::INTEGER) AS sunday
+    )
+    SELECT monday, sunday INTO monday_date, sunday_date FROM week_boundaries;
+
+    SELECT array_length(timetable, 1) INTO timetable_dates FROM timetable WHERE id = doctor_id;
+
+    SELECT count(*) INTO assignment_dates FROM assignations WHERE id_doctor = doctor_id and date_assignation > monday_date and date_assignation < sunday_date;
+
+    -- Call the percentage function and capture the result in a local variable
+    DECLARE
+        percentage_result numeric;
+    BEGIN
+        CALL percentage(assignment_dates, timetable_dates, percentage_result);
+        result := percentage_result;
+    END;
+
+    RAISE NOTICE 'Percentage: %', result;
+END;
+$$;
+----------------------------------------------------------------------------------------

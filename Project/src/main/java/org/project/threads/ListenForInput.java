@@ -2,6 +2,7 @@ package org.project.threads;
 
 import org.project.databases.Database;
 import org.project.entities.Patient;
+import org.project.functions.FunctionsDB;
 import org.project.functions.FunctionsPatients;
 import org.project.repositories.DoctorRepository;
 import org.project.repositories.PatientRepository;
@@ -38,6 +39,7 @@ public class ListenForInput implements Runnable {
                         "\n\tshow doctors - shows the available doctors" +
                         "\n\tshow patients - shows the available patients" +
                         "\n\tshow [id] [patient|doctor]" +
+                        "\n\tshow statistics [id] - shows the weekly stats for the doctor with the mentioned id" +
                         "\n\tregister patient [list of preferences] [fullName]" +
                         "\n\t\t\t[list of preferences] is not allowed to have ' ' between ids : ex: 1,2,3 (correct) 1, 3, 4 (wrong");
             } else if (input.equals("show doctors")) {
@@ -60,6 +62,12 @@ public class ListenForInput implements Runnable {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
+            } else if (input.startsWith("show statistics")) {
+                String[] splitCommand = input.split(" ");
+                int id = Integer.parseInt(splitCommand[2]);
+                FunctionsDB functionsDB = new FunctionsDB();
+                String result = functionsDB.checkStatistics(id);
+                System.out.println(result);
             } else if (input.startsWith("register patient")) {
                 String[] splitCommand = input.split(" ");
                 ArrayList<Integer> idDocs = functionsPatients.listOfDoctorsId(splitCommand[2]);

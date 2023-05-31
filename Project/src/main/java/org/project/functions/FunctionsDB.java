@@ -5,6 +5,7 @@ import org.project.entities.FinalResult;
 import org.project.repositories.DoctorRepository;
 import org.project.repositories.FinalResultRepository;
 
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -56,6 +57,24 @@ public class FunctionsDB {
 
             person_type = callableStatement.getInt(2);
             return person_type;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String checkStatistics(int id) {
+        BigDecimal percentage;
+        try {
+            Connection con = Database.getConnection();
+            CallableStatement callableStatement = con.prepareCall("CALL get_doctor_statistics(?,?,?)");
+            callableStatement.setDate(1, java.sql.Date.valueOf(java.time.LocalDate.now()));
+            callableStatement.setInt(2, id);
+            callableStatement.registerOutParameter(3, Types.NUMERIC);
+            callableStatement.executeUpdate();
+
+            percentage = callableStatement.getBigDecimal(3);
+            String result = "The doctor with the id " + id + " has " + percentage + "% of his work hours this week assigned to patients";
+            return result;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
