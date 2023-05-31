@@ -33,7 +33,7 @@ public class FinalResult {
     public FinalResult(int id_doctor, int id_patient, Date date) {
         this.id_doctor = id_doctor;
         this.id_patient = id_patient;
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         String dateString = formatter.format(date);
         try {
             this.date = formatter.parse(dateString);

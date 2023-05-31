@@ -28,7 +28,7 @@ public class Timetable {
     }
 
     public Timetable(int day, ArrayList<Date> timetable) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         this.day = day;
         this.timetable = new ArrayList<>();
         for (Date d : timetable) {

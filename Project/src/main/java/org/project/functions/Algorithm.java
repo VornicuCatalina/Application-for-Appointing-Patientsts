@@ -17,7 +17,7 @@ public class Algorithm {
     private ArrayList<Date> helperDates;
     private DoctorRepository doctorRepository = new DoctorRepository();
     private FinalResultRepository finalResultRepository = new FinalResultRepository();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     public void setPatient(Patient patient) {
         this.patient = patient;
