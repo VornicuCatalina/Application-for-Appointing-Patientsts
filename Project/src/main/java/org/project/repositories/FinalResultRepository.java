@@ -1,7 +1,6 @@
 package org.project.repositories;
 
 import org.project.entities.FinalResult;
-import org.project.entities.Timetable;
 
 import java.util.List;
 

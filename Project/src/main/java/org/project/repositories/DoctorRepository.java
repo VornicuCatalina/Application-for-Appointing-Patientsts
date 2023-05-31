@@ -2,8 +2,6 @@ package org.project.repositories;
 
 import org.project.entities.Doctor;
 
-import java.util.List;
-
 public class DoctorRepository extends DataRepository<Doctor, Long> {
     public Class<Doctor> getEntityClass() {
         return Doctor.class;

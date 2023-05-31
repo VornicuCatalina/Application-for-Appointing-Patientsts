@@ -1,6 +1,5 @@
 package org.project.repositories;
 
-import org.project.entities.Doctor;
 import org.project.entities.Patient;
 
 public class PatientRepository extends DataRepository<Patient, Long> {
