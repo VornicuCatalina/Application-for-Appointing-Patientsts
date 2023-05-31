@@ -1,9 +1,6 @@
 package org.project.repositories;
 
-import org.project.entities.Doctor;
 import org.project.entities.Timetable;
-
-import java.util.List;
 
 public class TimetableRepository extends DataRepository<Timetable, Long> {
     public Class<Timetable> getEntityClass() {

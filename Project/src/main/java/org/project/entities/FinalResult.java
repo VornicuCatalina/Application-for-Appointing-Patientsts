@@ -2,6 +2,7 @@ package org.project.entities;
 
 import jakarta.persistence.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -31,7 +32,8 @@ public class FinalResult {
     public FinalResult(int id_doctor, int id_patient, Date date) {
         this.id_doctor = id_doctor;
         this.id_patient = id_patient;
-        this.date = date;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        this.date = new Date(formatter.format(date));
     }
 
     public int getId() {
