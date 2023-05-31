@@ -2,6 +2,7 @@ package org.project.entities;
 
 import jakarta.persistence.*;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -33,7 +34,12 @@ public class FinalResult {
         this.id_doctor = id_doctor;
         this.id_patient = id_patient;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-        this.date = new Date(formatter.format(date));
+        String dateString = formatter.format(date);
+        try {
+            this.date = formatter.parse(dateString);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int getId() {

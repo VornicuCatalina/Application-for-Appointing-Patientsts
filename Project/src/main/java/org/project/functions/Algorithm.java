@@ -28,7 +28,6 @@ public class Algorithm {
         Date date = patient.getDateSignUp();
         long time = date.getTime() + millis * 60 * 24;
         Date newDate = new Date(time);
-        System.out.println(date + " " + newDate);
         boolean verify = false;
 
         //getting doctors in order

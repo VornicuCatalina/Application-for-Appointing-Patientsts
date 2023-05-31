@@ -10,6 +10,8 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FunctionsDB {
@@ -125,7 +127,9 @@ public class FunctionsDB {
             FinalResult finalResult = finalResultRepository.findByIdPatient(id);
             System.out.println("The patient " + name_patient + " (id: " + id +
                     ") has an appointment with the doctor "
-                    + name_doc + " (id: " + id_doc + ") on date " + registrationDate + " at hour " + finalResult.getDate().getHours()
+                    + name_doc + " (id: " + id_doc + ") on date "
+                    + registrationDate.getDate() + "-" + (registrationDate.getMonth() + 1) + "-" + (registrationDate.getYear() + 1900)
+                    + " at hour " + finalResult.getDate().getHours()
                     + ":" + finalResult.getDate().getMinutes() + ".You " + msg);
 
         } catch (SQLException e) {
@@ -150,9 +154,16 @@ public class FunctionsDB {
                 String[] rowItem = eachRow[i].split("_");
                 String[] date = rowItem[2].split(" ");
                 String[] timeDay = date[1].split(":");
-
-                System.out.println("The patient " + rowItem[1] + " (id: " + rowItem[0] + ") has its checkup on " +
-                        date[0] + " at hour " + timeDay[0] + ":" + timeDay[1]);
+                Date registrationDate;
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    registrationDate = formatter.parse(date[0]);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println("The patient " + rowItem[1] + " (id: " + rowItem[0] + ") has its checkup on "
+                        + registrationDate.getDate() + "-" + (registrationDate.getMonth() + 1) + "-" + (registrationDate.getYear() + 1900)
+                        + " at hour " + timeDay[0] + ":" + timeDay[1]);
             }
 
             //parsing stuff
