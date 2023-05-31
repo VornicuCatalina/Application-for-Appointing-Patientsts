@@ -92,3 +92,36 @@ BEGIN
 END;
 $$;
 ------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION updateChecked() RETURNS integer  LANGUAGE PLPGSQL AS $$
+DECLARE
+oldDates timestamp := current_timestamp;
+numberDates integer;
+dates integer[] ='{}';
+aSingleId record;
+counter integer :=0;
+idPatientsCursor CURSOR(p_date timestamp) FOR
+select id_patient,id_doctor from assignations where date_assignation<=p_date;
+BEGIN
+	select count(*) into numberDates from assignations where date_assignation<=oldDates;
+	if numberDates = 0 then
+		return 0;
+	else
+	open idPatientsCursor(oldDates);
+
+--for cursor, finding ids
+	loop
+	fetch idPatientsCursor into aSingleId;
+	exit when not found;
+	dates[counter] := aSingleId.id_patient;
+	counter:=counter+1;
+	end loop;
+	close idPatientsCursor;
+
+--now updating the checkup in patients
+	for i in 0..counter loop
+	update patients set checked=true where id_patient = dates[i];
+	end loop;
+	return numberDates;
+	end if;
+END;
+$$;
