@@ -45,6 +45,20 @@ public class FunctionsDB {
         }
     }
 
+    public void updateChecked() {
+        try {
+            Connection con = Database.getConnection();
+            CallableStatement cstmt = con.prepareCall("{? = CALL updateChecked()}");
+            cstmt.registerOutParameter(1, Types.INTEGER);
+            cstmt.executeUpdate();
+            int result = cstmt.getInt(1);
+            System.out.println("There had been updated " + result + " instances");
+            con.commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     //PROCEDURES
     public int checkExistence(int id) {
         int person_type; // -1 - nonexistent ; 1-doc 0-patient

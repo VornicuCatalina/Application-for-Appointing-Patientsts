@@ -126,7 +126,7 @@ public class Algorithm {
         }
     }
 
-    public ArrayList<Date> getHelperDates() {
+    private ArrayList<Date> getHelperDates() {
         return helperDates;
     }
 }

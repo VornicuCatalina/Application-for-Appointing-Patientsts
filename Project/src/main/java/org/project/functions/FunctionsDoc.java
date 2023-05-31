@@ -24,7 +24,7 @@ public class FunctionsDoc {
                 }
                 solution.add(date1);
                 dateHelper = dateHelper + (30 * millis);
-            } else if ((s_hour == hours) && (date1.getMinutes() < mins)) {
+            } else if ((s_hour == hours) && (date1.getMinutes() <= mins)) {
                 solution.add(date1);
                 dateHelper = dateHelper + (30 * millis);
                 ok = true;
@@ -50,8 +50,8 @@ public class FunctionsDoc {
 
         date1proj.setHours(hour_start);
         date1proj.setMinutes(min_start);
-        date1proj.setHours(hour_start);
-        date1proj.setMinutes(min_start);
+        date2proj.setHours(hour_finish);
+        date2proj.setMinutes(min_finish);
 
     }
 
