@@ -16,4 +16,14 @@ public class FunctionsPatients {
         }
         return finalIds;
     }
+
+    public ArrayList<Integer> listOfDoctorsForJSONFile(ArrayList<Integer> arrayList) {
+        ArrayList<Integer> finalIds = new ArrayList<>();
+        for (Integer id : arrayList) {
+            if (functionsDB.checkExistence(id) == 1) {
+                finalIds.add(id);
+            }
+        }
+        return finalIds;
+    }
 }

@@ -1,4 +1,4 @@
-package org.project.files;
+package org.project.fileOperations;
 
 public class TimetablesJSON {
     private int day;

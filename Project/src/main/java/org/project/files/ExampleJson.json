@@ -1,0 +1,44 @@
+{
+  "doctors": [
+    {
+      "name": "Levi",
+      "timetable": [
+        {
+          "day": 1,
+          "start": "10:30",
+          "finish": "12:40"
+        },
+        {
+          "day": 2,
+          "start": "10:30",
+          "finish": "17:40"
+        }
+      ]
+    },
+    {
+      "name": "Mikasa",
+      "timetable": [
+        {
+          "day": 4,
+          "start": "10:30",
+          "finish": "12:40"
+        },
+        {
+          "day": 6,
+          "start": "10:30",
+          "finish": "17:40"
+        }
+      ]
+    }
+  ],
+  "patients": [
+    {
+      "name": "George",
+      "preferences": [1,2,3,8,9]
+    },
+    {
+      "name": "Greg",
+      "preferences": [8,9,10,12]
+    }
+  ]
+}
