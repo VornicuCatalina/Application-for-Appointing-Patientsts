@@ -149,6 +149,10 @@ public class FunctionsDB {
             callableStatement.executeUpdate();
 
             result = callableStatement.getString(2);
+            if (result.isEmpty()) {
+                System.out.println("No appointments!");
+                return;
+            }
             String[] eachRow = parseComma(result);
             for (int i = 0; i < eachRow.length; i++) {
                 String[] rowItem = eachRow[i].split("_");

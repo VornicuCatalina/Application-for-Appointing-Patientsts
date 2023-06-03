@@ -4,6 +4,7 @@ import org.project.databases.Database;
 import org.project.entities.Doctor;
 import org.project.entities.Patient;
 import org.project.entities.Timetable;
+import org.project.fileOperations.ReadingFiles;
 import org.project.functions.Algorithm;
 import org.project.functions.FunctionsDB;
 import org.project.functions.FunctionsDoc;
@@ -29,6 +30,7 @@ public class ListenForInput implements Runnable {
     Thread deletingStuff;
     Thread updatingStuff;
 
+    ReadingFiles readingFiles = new ReadingFiles();
     ArrayList<String> days = new ArrayList<>();
 
     public void setThreads(Thread t, Thread t2) {
@@ -75,10 +77,14 @@ public class ListenForInput implements Runnable {
                 timetableRegistrations(input);
             } else if (input.startsWith("file")) {
                 if (input.contains(".json")) {
-                    //json func
-                } else {
+                    readingJSON(input);
+                } else if (input.contains(".json")) {
                     //csv func
+                } else {
+                    System.out.println("Wrong extension...");
                 }
+            } else if (input.startsWith("create") && (input.contains(".json") || input.contains(".csv"))) {
+                creatingFile(input);
             } else {
                 System.out.println("Invalid command! Type help for the available commands.");
             }
@@ -88,6 +94,8 @@ public class ListenForInput implements Runnable {
 
     private void help() {
         System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println("************************************* COMMANDS *************************************");
+        System.out.println("-----------------------------------------------------------------------------------");
         System.out.println("Here are the available commands:" +
                 "\n\texit - exits the program" +
                 "\n\thelp - shows the available commands" +
@@ -95,16 +103,25 @@ public class ListenForInput implements Runnable {
                 "\n\tshow patients - shows the available patients" +
                 "\n\tshow [id] [patient|doctor]" +
                 "\n\tshow statistics [id] - shows the weekly stats for the doctor with the mentioned id" +
-                "\n\tregister patient [list of preferences] [fullName]" +
-                "\n\t\t\t[list of preferences] is not allowed to have ' ' between ids : ex: 1,2,3 (correct) 1, 3, 4 (wrong)" +
-                "\n\tregister doctor [fullName]" +
-                "\n\ttimetable [id_doctor] [day] [hour_start] [hour_finish]" +
-                "\n\t\t\t[day] - a number between 0-6 [where 0 is Sunday] " +
-                "\n\t\tOR" +
-                "\n\t\t\twrite the day with a Capital letter, \texample: Monday (correct) , monday (wrong)" +
-                "\n\t\t\t[hour_start] & [hour_finish] have the following format:" +
-                "\n\t\t[hour]:[minutes] -> hour a number between 0-23 & -> minutes a number between 0-59");
+                "\n\tregister patient [list of preferences] [fullName]");
+        System.out.println("\tcreate <fileName.extension>" +
+                "\n\tfile <fileName.extension>");
+        System.out.println("\tregister doctor [fullName]" +
+                "\n\ttimetable [id_doctor] [day] [hour_start] [hour_finish]");
         System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println("************************************* DETAILS *************************************");
+        System.out.println("[list of preferences] is not allowed to have ' ' between ids : ex: 1,2,3 (correct) 1, 3, 4 (wrong)");
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("[day] - a number between 0-6 [where 0 is Sunday] " +
+                "\n\tOR" +
+                "\n\twrite the day with a Capital letter, \texample: Monday (correct) , monday (wrong)" +
+                "\n[hour_start] & [hour_finish] have the following format:" +
+                "\n[hour]:[minutes] -> hour a number between 0-23 & -> minutes a number between 0-59");
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("file <fileName.extension> To populate the database with new information (doctors & patients)");
+        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println("AVAILABLE EXTENSIONS:\t .json \t .csv");
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
     }
 
     private void showDoctors() {
@@ -235,5 +252,19 @@ public class ListenForInput implements Runnable {
         } else {
             System.out.println("We are sorry , but no doctor has that id!");
         }
+    }
+
+    private void readingJSON(String input) {
+        String[] command = input.split(" ");
+        //1.file
+        //2. .json file
+        readingFiles.readJSON(command[1]);
+    }
+
+    private void creatingFile(String input) {
+        String[] command = input.split(" ");
+        //1.file
+        //2. name file
+        readingFiles.createFile(command[1]);
     }
 }
