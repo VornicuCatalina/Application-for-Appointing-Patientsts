@@ -73,6 +73,12 @@ public class ListenForInput implements Runnable {
                 registerDoctor(input);
             } else if (input.startsWith("timetable")) {
                 timetableRegistrations(input);
+            } else if (input.startsWith("file")) {
+                if (input.contains(".json")) {
+                    //json func
+                } else {
+                    //csv func
+                }
             } else {
                 System.out.println("Invalid command! Type help for the available commands.");
             }

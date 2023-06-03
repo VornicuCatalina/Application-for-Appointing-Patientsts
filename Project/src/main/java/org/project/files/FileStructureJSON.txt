@@ -9,7 +9,7 @@
             "name":"<fullName>",
             "timetable":[
                 {
-                    "day":"<number/Name>",
+                    "day":<number>,
                     "start":"h1:m1",
                     "finish":"h2:m2"
                 },
@@ -23,7 +23,7 @@
     "patients":[
         {
             "name":"<fullName>",
-            "preferences":"<a list of ids>"
+            "preferences":<a list of ids>
         },...
     ]
 }
