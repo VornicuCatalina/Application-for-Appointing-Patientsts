@@ -1,5 +1,6 @@
 package org.project.threads;
 
+import com.opencsv.exceptions.CsvValidationException;
 import org.project.databases.Database;
 import org.project.entities.Doctor;
 import org.project.entities.Patient;
@@ -13,6 +14,7 @@ import org.project.repositories.DoctorRepository;
 import org.project.repositories.PatientRepository;
 import org.project.repositories.TimetableRepository;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -78,8 +80,14 @@ public class ListenForInput implements Runnable {
             } else if (input.startsWith("file")) {
                 if (input.contains(".json")) {
                     readingJSON(input);
-                } else if (input.contains(".json")) {
-                    //csv func
+                } else if (input.contains(".csv")) {
+                    try {
+                        readingCSV(input);
+                    } catch (CsvValidationException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 } else {
                     System.out.println("Wrong extension...");
                 }
@@ -259,6 +267,13 @@ public class ListenForInput implements Runnable {
         //1.file
         //2. .json file
         readingFiles.readJSON(command[1]);
+    }
+
+    private void readingCSV(String input) throws CsvValidationException, IOException {
+        String[] command = input.split(" ");
+        //1.file
+        //2. .csv file
+        readingFiles.readCSV(command[1]);
     }
 
     private void creatingFile(String input) {
