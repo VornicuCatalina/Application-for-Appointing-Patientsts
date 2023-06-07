@@ -8,6 +8,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import org.project.entities.Doctor;
 import org.project.entities.Patient;
 import org.project.entities.Timetable;
+import org.project.functions.Algorithm;
 import org.project.functions.FunctionsDB;
 import org.project.functions.FunctionsDoc;
 import org.project.repositories.DoctorRepository;
@@ -133,6 +134,10 @@ public class ReadingFiles {
                 patient.setPreferences(preferencesList);
                 PatientRepository patientRepository = new PatientRepository();
                 patientRepository.save(patient);
+
+                Algorithm algorithm = new Algorithm();
+                algorithm.setPatient(patient);
+                algorithm.addingInTable();
             }
             else {
                 System.out.println("ERROR: The person type is not correct!");

@@ -1,5 +1,6 @@
 package org.project.functions;
 
+import jakarta.persistence.NoResultException;
 import org.project.databases.Database;
 import org.project.entities.FinalResult;
 import org.project.repositories.DoctorRepository;
@@ -134,10 +135,16 @@ public class FunctionsDB {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }catch (NoResultException e){
+            System.out.println("There is no patient with this id");
         }
     }
 
     public void showDoctor(int id) {
+        if (doctorRepository.findById(id) == null) {
+            System.out.println("There is no doctor with this id");
+            return;
+        }
         System.out.println("That is your schedule doctor " + doctorRepository.findById(id).getName() + " (id: " + id + ")");
         String result;
         try {
@@ -145,7 +152,6 @@ public class FunctionsDB {
             CallableStatement callableStatement = con.prepareCall("CALL showDoctor(?,?)");
             callableStatement.setInt(1, id);
             callableStatement.registerOutParameter(2, Types.VARCHAR);
-
             callableStatement.executeUpdate();
 
             result = callableStatement.getString(2);

@@ -1,5 +1,6 @@
 package org.project.repositories;
 
+import jakarta.persistence.NoResultException;
 import org.project.entities.Doctor;
 
 public class DoctorRepository extends DataRepository<Doctor, Long> {
@@ -15,9 +16,13 @@ public class DoctorRepository extends DataRepository<Doctor, Long> {
     }
 
     public Doctor findById(int id) {
-        return getEntityManager().
-                createNamedQuery("Doctor.findById", Doctor.class)
-                .setParameter(1, id)
-                .getSingleResult();
+        try {
+            return getEntityManager().
+                    createNamedQuery("Doctor.findById", Doctor.class)
+                    .setParameter(1, id)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 }
